@@ -1,0 +1,23 @@
+const express = require("express");
+const bodyParser = require("body-parser");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+  res.send("Tebex webhook is online!");
+});
+
+app.post("/webhook", (req, res) => {
+  console.log("Tebex webhook received:");
+  console.log(JSON.stringify(req.body, null, 2));
+
+  res.setHeader("Content-Type", "text/plain");
+  res.status(200).send("OK");
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
