@@ -1,14 +1,19 @@
 const express = require('express');
 const app = express();
+const PORT = process.env.PORT || 3000;
 
+// Middleware para parsear JSON
 app.use(express.json());
 
+// Webhook handler
 app.post('/webhook', (req, res) => {
-  console.log('Webhook received:', req.body);
-  res.sendStatus(200);
+  console.log('Datos recibidos en /webhook:');
+  console.log(req.body);
+
+  res.sendStatus(200); // OK
 });
 
-const PORT = process.env.PORT || 3000;
+// Arrancar servidor
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  console.log(`Servidor corriendo en puerto ${PORT}`);
 });
