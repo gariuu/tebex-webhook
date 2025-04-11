@@ -7,20 +7,12 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Webhook endpoint
 app.post('/webhook', (req, res) => {
   console.log('--- Webhook recibido ---');
+  console.log('Headers:', JSON.stringify(req.headers, null, 2));
+  console.log('Body:', JSON.stringify(req.body, null, 2));
 
-  // Loguear headers por si Tebex manda algo especial
-  console.log('Headers:');
-  console.log(JSON.stringify(req.headers, null, 2));
-
-  // Loguear el body completo
-  console.log('Body:');
-  console.log(JSON.stringify(req.body, null, 2));
-
-  // Responder 200 OK para que Tebex lo valide
-  res.sendStatus(200);
+  res.status(200).json({ status: 'ok' });
 
   console.log('Respondí con 200 OK');
   console.log('-------------------------');
